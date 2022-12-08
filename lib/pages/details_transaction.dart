@@ -28,57 +28,47 @@ class _DetailsTransactionState extends State<DetailsTransaction> {
         child: Column(
           children: [
             Container(
-              height: 80,
+              padding: EdgeInsets.only(top: 35, bottom: 5),
               width: double.infinity,
               color: primaryColor,
-              padding: EdgeInsets.only(left: 10, right: 10, top: 30),
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Expanded(
-                      flex: 2,
-                      child: Platform.isAndroid ? IconButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          }, icon: const Icon(Icons.arrow_back, color: whiteColor)) : GestureDetector(
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                            child: Row(
-                              children: [
-                                Icon(Icons.arrow_back_ios_new, color: whiteColor),
-                                Text("Back", style: simpleTextWhite(),)
-                              ],
-                            ),
-                      )
+                  Platform.isAndroid ? IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      }, icon: const Icon(Icons.arrow_back, color: whiteColor, size: 25,)) : GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Row(
+                      children: [
+                        const Icon(Icons.arrow_back_ios_new, color: whiteColor, size: 25),
+                        Text("Back", style: simpleTextWhite(),)
+                      ],
+                    ),
                   ),
-                  Expanded(
-                      flex: 8,
-                      child: Row(
-                        mainAxisAlignment: Platform.isIOS? MainAxisAlignment.center: MainAxisAlignment.start,
-                        children: [
-                          Text("Transfer", style: textTabsActif(15),),
-                          const SizedBox(width: 25,)
-                        ],
-                      )
-                  ),
-                  Expanded(
-                      flex: 1,
-                      child: IconButton(onPressed: () {
+                  SizedBox(width: 20),
+                  Text("Transfer", style: textTabsActif(20),),
+                  Spacer(),
+                  IconButton(onPressed: () {
 
-                      }, icon: Icon(Platform.isIOS ? MyFlutterApp.share_1_ : MyFlutterApp.share, color: whiteColor,))
-                  ),
+                  }, icon: Icon(Platform.isIOS ? MyFlutterApp.share_1_ : MyFlutterApp.share, color: whiteColor, size: 22))
                 ],
               ),
             ),
-            SizedBox(height: 15),
-            Text("+0.132015 BTC", style: textBolderWithColor(30, sucessColor),),
-            SizedBox(height: 5),
-            Text("≈ \$3,157.13", style: textBoldWithColor(16, greyColor),),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
+            Text("+0.03031643 BTC", style: textBolderWithColor(30, sucessColor),),
+            const SizedBox(height: 5),
+            Text("≈ \$499.97", style: textBoldWithColor(16, greyColor),),
+            const SizedBox(height: 15),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Card(
                 elevation: 1,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
                 color: whiteColor,
                 child: Container(
                   width: double.infinity,
@@ -96,7 +86,7 @@ class _DetailsTransactionState extends State<DetailsTransaction> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text("Date", style: simpleTextWithCustomSizeAndColors(15, Colors.black)),
-                            Text("Jul 30, 2022 at 20:32", style: simpleTextWithCustomSizeAndColors(15)),
+                            Text("Today, 2022 at 07:20", style: simpleTextWithCustomSizeAndColors(15)),
                           ],
                         ),
                       ),
@@ -121,17 +111,17 @@ class _DetailsTransactionState extends State<DetailsTransaction> {
                                 ],
                               ),
                             ),
-                            Text("Completed", style: simpleTextWithCustomSizeAndColors(15)),
+                            Text("Confirmé", style: simpleTextWithCustomSizeAndColors(15)),
                           ],
                         ),
                       ),
-                      Container(
+                      SizedBox(
                         height: 38,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text("Sender", style: simpleTextWithCustomSizeAndColors(15, Colors.black)),
-                            Text("19dENFt4w...57WCS58", style: simpleTextWithCustomSizeAndColors(15)),
+                            Text("bc1qj07dd0...80emeuxc52m", style: simpleTextWithCustomSizeAndColors(15)),
                           ],
                         ),
                       ),
@@ -145,9 +135,12 @@ class _DetailsTransactionState extends State<DetailsTransaction> {
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Card(
                 elevation: 1,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
                 color: whiteColor,
                 child: Container(
-                  height: 30,
+                  height: 22,
                   width: double.infinity,
                   margin: const EdgeInsets.all(10),
                   child: Row(
@@ -155,16 +148,16 @@ class _DetailsTransactionState extends State<DetailsTransaction> {
                     children: [
                       SizedBox(
                         height: double.infinity,
-                        width: 115,
+                        width: 125,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text("Network Fee", style: simpleTextWithCustomSizeAndColors(15, Colors.black)),
-                            const Icon(Icons.info_rounded, color: greyColor,size: 17,)
+                            const Icon(Icons.info_rounded, color: greyColor,size: 17)
                           ],
                         ),
                       ),
-                      Text("0.00004156 BTC (\$0.67)", style: simpleTextWithCustomSizeAndColors(15)),
+                      Text("0.00001074 BTC (\$0.17)", style: simpleTextWithCustomSizeAndColors(15)),
                     ],
                   ),
                 ),
@@ -177,32 +170,6 @@ class _DetailsTransactionState extends State<DetailsTransaction> {
           ],
         ),
       ),
-      bottomNavigationBar:BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            currentIndex: _selectedIndex,
-            selectedItemColor: primaryColor,
-            unselectedItemColor: greyColor,
-            showSelectedLabels: true,
-            showUnselectedLabels: true,
-            onTap: _onItemTapped,
-            items: <BottomNavigationBarItem>[
-              const BottomNavigationBarItem(
-                icon: Icon(Icons.shield),
-                label: 'Wallet',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Platform.isAndroid ? MyFlutterApp.th_large: MyFlutterApp.compass),
-                label: Platform.isAndroid ? 'DApps': 'Discover',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Platform.isAndroid ? MyFlutterApp.exchange: MyFlutterApp.th_large),
-                label: Platform.isAndroid ? 'DEX': 'Browser',
-              ),
-              const BottomNavigationBarItem(
-                icon: Icon(Icons.settings),
-                label: 'Settings',
-              ),
-            ])
     );
   }
 }

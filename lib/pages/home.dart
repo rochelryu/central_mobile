@@ -1,3 +1,4 @@
+import 'package:central_mobile_payement/pages/homescreen.dart';
 import 'package:flutter/material.dart';
 import 'package:telephony/telephony.dart';
 import 'package:ussd_advanced/ussd_advanced.dart';
@@ -246,7 +247,10 @@ class _HomeState extends State<Home>  {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: (){
+
+          Navigator.pushNamed(context, Homescreen.routeName);
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.

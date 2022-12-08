@@ -1,5 +1,8 @@
+import 'package:central_mobile_payement/ServicesWorker/ConsumeAPI.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../helpers/common_widget.dart';
 import '../helpers/style.dart';
 import 'home.dart';
 
@@ -22,6 +25,7 @@ class _LoginState extends State<Login> {
   bool _password = false;
   bool viewPassword = false;
   bool requestLoading = false;
+  ConsumeAPI consumeAPI = ConsumeAPI();
 
 
   @override
@@ -124,7 +128,7 @@ class _LoginState extends State<Login> {
                                       color: primaryColor, fontWeight: FontWeight.w300),
                                   cursorColor: primaryColor,
                                   obscureText: !viewPassword,
-                                  keyboardType: TextInputType.phone,
+                                  keyboardType: TextInputType.text,
                                   onChanged: (text) {
                                     setState(() {
                                       _contact = false;
@@ -153,8 +157,52 @@ class _LoginState extends State<Login> {
                           ),
                           ElevatedButton(
                             onPressed: () async {
-                              //if(!requestLoading) {}
-                              Navigator.pushNamed(context, Home.routeName);
+                              if(!requestLoading && contactCtrl.text.trim().length == 10 && passwordCtrl.text.trim().length >= 6) {
+                                setState(() {
+                                  requestLoading = true;
+                                });
+                                final data = await consumeAPI.signin(contactCtrl.text, passwordCtrl.text);
+                                setState(() {
+                                  requestLoading = false;
+                                });
+                                if(data["etat"] == "found" && data["result"]["role"] == "ADMIN_MOBILE_MONEY_BOOT") {
+                                  final prefs = await SharedPreferences.getInstance();
+                                  await prefs.setInt('idAdmin', 2);
+                                  await prefs.setString('ident', data["result"]["ident"]);
+                                  await prefs.setString('recovery', data["result"]["recovery"]);
+                                  await prefs.setString('name', data["result"]["name"]);
+                                  Navigator.pushNamed(context, Home.routeName);
+                                } else {
+                                  if(data["result"] && data["result"]["role"] != "ADMIN_MOBILE_MONEY_BOOT") {
+                                    return showDialog<void>(
+                                      context: context,
+                                      barrierDismissible: false, // user must tap button!
+                                      builder: (BuildContext context) {
+                                        return dialogCustomError("Non Authorisé", "Vous n'avez pas le droit", context);
+                                      },
+                                    );
+                                  } else {
+                                    return showDialog<void>(
+                                      context: context,
+                                      barrierDismissible: false, // user must tap button!
+                                      builder: (BuildContext context) {
+                                        return dialogCustomError("Indentifiant incoorect",data["error"], context);
+                                      },
+                                    );
+                                  }
+                                }
+                              } else {
+                                if(contactCtrl.text.trim().length != 10 || passwordCtrl.text.trim().length < 6) {
+                                  return showDialog<void>(
+                                    context: context,
+                                    barrierDismissible: false, // user must tap button!
+                                    builder: (BuildContext context) {
+                                      return dialogCustomError("Saisie incomplète","Veuillez remplir coorectement les champs", context);
+                                    },
+                                  );
+                                }
+                              }
+
                             },
                             child: const Text("Connexion"),
                           )

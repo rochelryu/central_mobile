@@ -6,6 +6,7 @@ import '../helpers/my_flutter_app_icons.dart';
 import 'details_transaction.dart';
 
 class Homescreen extends StatefulWidget {
+  static String routeName = "/homeScreenCrypto";
   const Homescreen({required Key key}) : super(key: key);
 
   @override
@@ -38,7 +39,7 @@ class _HomescreenState extends State<Homescreen> with SingleTickerProviderStateM
           children: [
             Container(
               width: MediaQuery.of(context).size.width,
-              height: Platform.isAndroid ? 310: 290,
+              height: 250,
               color: primaryColor,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -46,53 +47,19 @@ class _HomescreenState extends State<Homescreen> with SingleTickerProviderStateM
                   Container(
                     margin: const EdgeInsets.only(top: 35),
                     padding: const EdgeInsets.symmetric(horizontal: 10),
-                    height: 50,
+                    height: 20,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Image.asset("assets/images/bell.png", height: Platform.isAndroid ? 30:20),
-                        const SizedBox(width: 10),
-                        if(Platform.isAndroid) Expanded(child: Container(
-                              height: 33,
-                              padding: EdgeInsets.all(2),
-                              decoration: BoxDecoration(
-                                color: Colors.black26,
-                                borderRadius: BorderRadius.circular(5)
-                              ),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                            color: primaryColor,
-                                            borderRadius: BorderRadius.circular(5)
-                                        ),
-                                        child: Center(
-                                          child: Text("Tokens", style: textTabsActif(),),
-                                        ),
-                                      )),
-                                  Expanded(
-                                      child: Container(
-                                        child: Center(
-                                          child: Text("Finance", style: textTabsUnActif(),),
-                                        ),
-                                      )),
-                                  Expanded(
-                                      child: Container(
-                                        child: Center(
-                                          child: Text("Collectibles", style: textTabsUnActif(),),
-                                        ),
-                                      )),
-                                ],
-                              ),
-                            )),
-                        const SizedBox(width: 10),
-                        Image.asset("assets/images/optionm.png", height: Platform.isAndroid ? 30:20),
+                        Image.asset("assets/images/bell.png", height: 20),
+
+                        Image.asset("assets/images/optionm.png", height: 20),
                       ],
                     ),
                   ),
-                  Text("\$3,157.13", style: textTabsActif(35)),
-                  Text("Multi-Coin wallet", style: textTabsUnActif(17)),
+                  Text("\$23,116.03", style: textTabsActif(24)),
+                  //SizedBox(height: 15),
+                  Text("STARTUP  Wallet 4", style: textTabsUnActif(17)),
                   SizedBox(
                     height: 100,
                     child: Row(
@@ -119,7 +86,7 @@ class _HomescreenState extends State<Homescreen> with SingleTickerProviderStateM
                             ],
                           ),
                         ),
-                        SizedBox(width: Platform.isAndroid ? 40:30),
+                        SizedBox(width: 30),
                         SizedBox(
                           height: 80,
                           child: Column(
@@ -140,7 +107,7 @@ class _HomescreenState extends State<Homescreen> with SingleTickerProviderStateM
                             ],
                           ),
                         ),
-                        SizedBox(width: Platform.isAndroid ? 40:30),
+                        SizedBox(width: 30),
                         SizedBox(
                           height: 80,
                           child: Column(
@@ -161,8 +128,8 @@ class _HomescreenState extends State<Homescreen> with SingleTickerProviderStateM
                             ],
                           ),
                         ),
-                        if(Platform.isIOS) SizedBox(width: Platform.isAndroid ? 40:30),
-                        if(Platform.isIOS) SizedBox(
+                        SizedBox(width:30),
+                        SizedBox(
                           height: 80,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -189,7 +156,7 @@ class _HomescreenState extends State<Homescreen> with SingleTickerProviderStateM
                 ],
               ),
             ),
-            if(Platform.isIOS) Container(
+            Container(
               color: primaryColor,
               height: 45,
               child: Stack(
@@ -274,9 +241,9 @@ class _HomescreenState extends State<Homescreen> with SingleTickerProviderStateM
                                       width: 150,
                                       child: Row(
                                         children: [
-                                          Text("\$23,961.87", style: simpleTextWithCustomSizeAndColors(12),),
+                                          Text("\$19,292.23", style: simpleTextWithCustomSizeAndColors(12),),
                                           const SizedBox(width: 5),
-                                          Text("+0.32%", style: simpleTextWithCustomSizeAndColors(12, sucessColor),),
+                                          Text("+0.38%", style: simpleTextWithCustomSizeAndColors(12, sucessColor),),
                                         ],
                                       ),
                                     )
@@ -288,8 +255,8 @@ class _HomescreenState extends State<Homescreen> with SingleTickerProviderStateM
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text("0.132015 BTC", style: textBoldWithColor(15),),
-                                    Text("\$3,157.13", style: simpleTextWithCustomSizeAndColors(12),),
+                                    Text("1.19894888 BTC", style: textBoldWithColor(15),),
+                                    Text("\$23,116.03", style: simpleTextWithCustomSizeAndColors(12),),
                                   ],
                                 )
                             ),
@@ -348,9 +315,9 @@ class _HomescreenState extends State<Homescreen> with SingleTickerProviderStateM
                                     width: 150,
                                     child: Row(
                                       children: [
-                                        Text("\$1,691.75", style: simpleTextWithCustomSizeAndColors(12),),
+                                        Text("\$1,327.08", style: simpleTextWithCustomSizeAndColors(12),),
                                         const SizedBox(width: 5),
-                                        Text("-0.46%", style: simpleTextWithCustomSizeAndColors(12, errorColor!),),
+                                        Text("+0.36%", style: simpleTextWithCustomSizeAndColors(12, sucessColor),),
                                       ],
                                     ),
                                   )
@@ -419,9 +386,9 @@ class _HomescreenState extends State<Homescreen> with SingleTickerProviderStateM
                                     width: 150,
                                     child: Row(
                                       children: [
-                                        Text("\$290.65", style: simpleTextWithCustomSizeAndColors(12),),
+                                        Text("\$283.08", style: simpleTextWithCustomSizeAndColors(12),),
                                         const SizedBox(width: 5),
-                                        Text("-0.46%", style: simpleTextWithCustomSizeAndColors(12, errorColor!),),
+                                        Text("+1.34%", style: simpleTextWithCustomSizeAndColors(12, sucessColor),),
                                       ],
                                     ),
                                   )
@@ -490,9 +457,9 @@ class _HomescreenState extends State<Homescreen> with SingleTickerProviderStateM
                                     width: 150,
                                     child: Row(
                                       children: [
-                                        Text("\$290.65", style: simpleTextWithCustomSizeAndColors(12),),
+                                        Text("\$283.08", style: simpleTextWithCustomSizeAndColors(12),),
                                         const SizedBox(width: 5),
-                                        Text("-0.46%", style: simpleTextWithCustomSizeAndColors(12, errorColor!),),
+                                        Text("+1.34%", style: simpleTextWithCustomSizeAndColors(12, sucessColor),),
                                       ],
                                     ),
                                   )

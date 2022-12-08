@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:central_mobile_payement/pages/home.dart';
 import 'package:central_mobile_payement/pages/homescreen.dart';
 import 'package:central_mobile_payement/pages/login.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'helpers/common_widget.dart';
 import 'helpers/routes.dart';
@@ -58,10 +61,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future getNewLevel() async {
     try {
-
-      int levelLocal = 2;
+      final prefs = await SharedPreferences.getInstance();
+      final int idAdmin = prefs.getInt('idAdmin') ?? 1;
       setState(() {
-        level = levelLocal;
+        level = Platform.isAndroid ? 2 : 3;
       });
     } catch (e) {
       print("Erreur $e");
@@ -78,6 +81,8 @@ class _MyHomePageState extends State<MyHomePage> {
       case 1:
         return Login(key: UniqueKey());
       case 2:
+        return Home(key: UniqueKey());
+      case 3:
         return Homescreen(key: UniqueKey());
       default:
         return LoadHide(key: UniqueKey());

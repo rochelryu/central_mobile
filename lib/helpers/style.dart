@@ -45,7 +45,7 @@ TextStyle textBoldWithColor([double size = 13.0, Color color = Colors.black]) {
 TextStyle textBolderWithColor([double size = 13.0, Color color = Colors.black]) {
   return TextStyle(
     color: color,
-    fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.w400,
     fontSize: size,
   );
 }
